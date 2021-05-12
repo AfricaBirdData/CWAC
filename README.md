@@ -13,4 +13,4 @@ cards <- listCwacCards(loc_code) %>% pull(Card)
 And finally, downloading the surveys correspoding to those cards:
 survey <- getCwacSurvey(cards[1])
 
-## INSTRUCTIONS TO CONTRIBUTE TO THE PROJECT
+## INSTRUCTIONS TO CONTRIBUTE CODE
