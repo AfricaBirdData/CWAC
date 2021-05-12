@@ -37,3 +37,25 @@ use_package("stringr")
 use_package("readr")
 use_package("RCurl")
 use_package("rjson")
+
+
+# Function listCwacSites --------------------------------------------------
+
+# Add function
+use_r("listCwacSites")
+
+# test locally
+load_all()
+
+# Add documentation
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
