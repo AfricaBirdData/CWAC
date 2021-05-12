@@ -2,6 +2,7 @@
 
 export("%>%")
 export(getCwacSiteInfo)
+export(getCwacSurvey)
 export(listCwacCards)
 export(listCwacSites)
 importFrom(magrittr,"%>%")

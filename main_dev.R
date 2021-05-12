@@ -123,7 +123,7 @@ use_r("getCwacSurvey")
 # test locally
 load_all()
 
-getCwacSurvey()
+getCwacSurvey(508082)
 
 # Add documentation
 # Add ROxygen skeleton manually
@@ -138,3 +138,10 @@ use_testthat()
 use_test()
 
 test()
+
+
+# Install -----------------------------------------------------------------
+
+install()
+
+

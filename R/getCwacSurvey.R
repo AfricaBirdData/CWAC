@@ -1,6 +1,18 @@
-getCwacSurvey <- function(card_code){
+#' Download information from a particular CWAC survey card
+#'
+#' @param card Numeric or character string correspoding to the card code to download information for
+#'
+#' @return A list with three elements: i) summary of the survey metadata, ii) information about the observers that collected the data
+#' (if available), iii) counts recorded in the selected card
+#'
+#' @export
+#'
+#' @examples
+#' getCwacSurvey(508082)
+#' getCwacSurvey("508082")
+getCwacSurvey <- function(card){
 
-  url <- paste0("http://api.adu.org.za/cwac/cards/single/get?card=", card_code)
+  url <- paste0("http://api.adu.org.za/cwac/cards/single/get?card=", card)
 
   myfile <- RCurl::getURL(url, ssl.verifyhost = FALSE, ssl.verifypeer = FALSE)
   jsonfile <- rjson::fromJSON(myfile)
