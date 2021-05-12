@@ -47,6 +47,32 @@ use_r("listCwacSites")
 # test locally
 load_all()
 
+listCwacSites("Eastern Cape")
+
+# Add documentation
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
+
+# Function getCwacSiteInfo --------------------------------------------------
+
+# Add function
+use_r("getCwacSiteInfo")
+
+# test locally
+load_all()
+
+getCwacSiteInfo(23312919)
+
 # Add documentation
 document()
 
