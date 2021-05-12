@@ -50,6 +50,7 @@ load_all()
 listCwacSites("Eastern Cape")
 
 # Add documentation
+# Add ROxygen skeleton manually
 document()
 
 check()
@@ -74,6 +75,58 @@ load_all()
 getCwacSiteInfo(23312919)
 
 # Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
+
+# Function listCwacCards --------------------------------------------------
+
+# Add function
+use_r("listCwacCards")
+
+# test locally
+load_all()
+
+listCwacCards(32481810)
+
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
+
+
+# Function getCwacSurvey --------------------------------------------------
+
+# Add function
+use_r("getCwacSurvey")
+
+# test locally
+load_all()
+
+getCwacSurvey()
+
+# Add documentation
+# Add ROxygen skeleton manually
 document()
 
 check()
