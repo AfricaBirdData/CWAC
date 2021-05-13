@@ -140,6 +140,79 @@ use_test()
 test()
 
 
+# Function jsonToTibble --------------------------------------------------
+
+# Add function
+use_r("jsonToTibble")
+
+# test locally
+load_all()
+
+
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
+
+# Function getDicctionary --------------------------------------------------
+
+# Add function
+use_r("getCwacDictionary")
+
+# test locally
+load_all()
+
+getCwacDictionary()
+
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
+
+# Function searchCwacTerm --------------------------------------------------
+
+# Add function
+use_r("searchCwacTerm")
+
+# test locally
+load_all()
+
+searchCwacTerm("Season")
+
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
 # Install -----------------------------------------------------------------
 
 install()

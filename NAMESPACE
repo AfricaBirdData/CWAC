@@ -3,6 +3,8 @@
 export("%>%")
 export(getCwacSiteInfo)
 export(getCwacSurvey)
+export(jsonToTibble)
 export(listCwacCards)
 export(listCwacSites)
+export(searchCwacTerm)
 importFrom(magrittr,"%>%")

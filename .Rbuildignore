@@ -2,3 +2,4 @@
 ^CWAC\.Rproj$
 ^\.Rproj\.user$
 main_dev
+beta/*
