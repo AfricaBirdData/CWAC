@@ -23,11 +23,13 @@ For site owners:
 
 There is the danger of multiple people working simultaneously on the project code. If you make changes locally on your computer and, before you push your changes, others push theirs, there might be conflicts. This is because the HEAD pointer in the main branch has moved since you started working. 
 
-To deal with these lurking issues, I would suggest opening and working on a topic branch. This is a just a regular branch that has a short lifespan. In other words:
+To deal with these lurking issues, I would suggest opening and working on a topic branch. This is a just a regular branch that has a short lifespan. In steps:
 
-- Open a branch
-- Make your changes
-- Merge it as soon as possible,
+- Open a branch at your local machine
+- Push to the remote repo
+- Make your changes in your local machine
+- Commit and push to remote
+- In the GitHub repo you will now see an option that notifies of changes in a branch: compare and pull request.
 - Close/delete the branch.
 
 Opening branches is quick and easy, so there is no harm in opening multiple branches a day. However, it is important to merge and delete them often to keep things tidy. Git provides functionality to deal with conflicting branches. More about branches here:
