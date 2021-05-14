@@ -17,6 +17,16 @@ And finally, downloading the surveys correspoding to those cards:
 
 survey <- getCwacSurvey(cards[1])
 
+## INSTRUCTION TO INSTALL
+
+1. Clone the repository to your local machine:
+   - In RStudio, create a new project
+   - In the 'Create project' menu, select 'Version Control'/'Git'
+   - Copy the repository URL (click on the 'Code' green button and copy the link)
+   - Choose the appropiate directory and 'Create project'
+2. Install the package 'rtools' in case you don´t have it and run devtools::install() from the project directory
+3. Remember to pull the latest version regularly
+
 ## INSTRUCTIONS TO CONTRIBUTE CODE
 
 For site owners:
