@@ -19,12 +19,7 @@ listCwacCards <- function(loc_code){
   print(jsonfile$status$result)
 
   out <- jsonfile$cards %>%
-    lapply(function(x) {
-      x[sapply(x, is.null)] <- NA
-      unlist(x)
-    }) %>%
-    do.call("rbind", .) %>%
-    dplyr::as_tibble()
+    CWAC::jsonToTibble()
 
   # Fix column types (WE SHOULD FIX FURTHER?)
   out <- out %>%

@@ -14,9 +14,15 @@ jsonToTibble <- function(jsonfile){
   out <- jsonfile %>%
     lapply(function(x) {
       x[sapply(x, is.null)] <- NA
-      unlist(x)
+      x <- unlist(x)
+      x[x == "N/A"] <- NA
+      cnames <- names(x)
+      df <- data.frame()
+      df <- rbind(df, x)
+      names(df) <- cnames
+      return(df)
     }) %>%
-    do.call("rbind", .) %>%
+    data.table::rbindlist(fill = TRUE) %>%
     dplyr::as_tibble()
 
   return(out)

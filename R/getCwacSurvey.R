@@ -56,12 +56,7 @@ getCwacSurvey <- function(card){
   # Extract and prepare records
 
   records <- jsonfile$records %>%
-    lapply(function(x) {
-      x[sapply(x, is.null)] <- NA
-      unlist(x)
-    }) %>%
-    do.call("rbind", .) %>%
-    dplyr::as_tibble() %>%
+    CWAC::jsonToTibble() %>%
     readr::type_convert(col_types = readr::cols(
       count_id = readr::col_integer(),
       card = readr::col_integer(),
