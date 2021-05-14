@@ -24,7 +24,7 @@ survey <- getCwacSurvey(cards[1])
    - In the 'Create project' menu, select 'Version Control'/'Git'
    - Copy the repository URL (click on the 'Code' green button and copy the link)
    - Choose the appropiate directory and 'Create project'
-2. Install the package 'rtools' in case you don´t have it and run devtools::install() from the project directory
+2. Install the package 'devtools' in case you don´t have it and run devtools::install() from the project directory
 3. Remember to pull the latest version regularly
 
 ## INSTRUCTIONS TO CONTRIBUTE CODE
