@@ -33,7 +33,8 @@ To deal with these lurking issues, I would suggest opening and working on a topi
   - In the GitHub repo you will now see an option that notifies of changes in a branch: click compare and pull request.
   - If there are no conflicts 'merge pull request'
 - Delete the branch. You will have to delete it in the remote repo (GitHub) and also in your local machine. In your local machine you have to use Git directly, apparently RStudio doesn´t do it:
-  - Either use the Git GUI (go to branches/delete/...).
+  - In your local machine, change to master branch.
+  - Either use the Git GUI (go to branches/delete/select branch/push).
   - Or use the console typing 'git branch -d your_branch_name'.
 
 Opening branches is quick and easy, so there is no harm in opening multiple branches a day. However, it is important to merge and delete them often to keep things tidy. Git provides functionality to deal with conflicting branches. More about branches here:
