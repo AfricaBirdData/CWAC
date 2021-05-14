@@ -37,6 +37,7 @@ use_package("stringr")
 use_package("readr")
 use_package("RCurl")
 use_package("rjson")
+use_package("data.table")
 
 
 # Function listCwacSites --------------------------------------------------

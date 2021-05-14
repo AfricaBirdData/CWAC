@@ -21,12 +21,7 @@ getCwacSiteInfo <- function(loc_code){
   print(jsonout$result)
 
   out <- jsonfile$site %>%
-    lapply(function(x) {
-      x[sapply(x, is.null)] <- NA
-      unlist(x)
-    }) %>%
-    do.call("rbind", .) %>%
-    dplyr::as_tibble()
+    CWAC::jsonToTibble()
 
   return(out)
 

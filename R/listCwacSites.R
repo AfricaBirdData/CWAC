@@ -20,12 +20,7 @@ listCwacSites <- function(province){
   myfile <- RCurl::getURL(url, ssl.verifyhost = FALSE, ssl.verifypeer = FALSE)
 
   out <- rjson::fromJSON(myfile) %>%
-    lapply(function(x) {
-      x[sapply(x, is.null)] <- NA
-      unlist(x)
-    }) %>%
-    do.call("rbind", .) %>%
-    dplyr::as_tibble()
+    CWAC::jsonToTibble()
 
   return(out)
 }
