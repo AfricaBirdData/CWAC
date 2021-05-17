@@ -199,7 +199,7 @@ use_r("searchCwacTerm")
 load_all()
 
 searchCwacTerm("Season")
-
+searchCwacTerm(option = "fields")
 # Add documentation
 # Add ROxygen skeleton manually
 document()

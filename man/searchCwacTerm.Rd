@@ -4,10 +4,12 @@
 \alias{searchCwacTerm}
 \title{Search for a term in the CWAC dicctionary}
 \usage{
-searchCwacTerm(term)
+searchCwacTerm(term = NULL, option = c("term", "fields"))
 }
 \arguments{
 \item{term}{A character string corresponding a term found in CWAC data. The term must be spelled exactly as it appears in the data.}
+
+\item{option}{A character string with one of two options: "term" will search for the term specified in the term argument, "fields" returns a vector with the names of all possible search terms}
 }
 \value{
 A list with a description of the term and, if it exists, the different values that the variable can take on.
@@ -16,5 +18,6 @@ A list with a description of the term and, if it exists, the different values th
 Search for a term in the CWAC dicctionary
 }
 \examples{
-searchCwacTerm("Season")
+searchCwacTerm(term = "Season")
+searchCwacTerm(option = "fields")
 }
