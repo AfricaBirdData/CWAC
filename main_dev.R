@@ -38,6 +38,7 @@ use_package("readr")
 use_package("RCurl")
 use_package("rjson")
 use_package("data.table")
+use_package("utils")
 
 
 # Function listCwacSites --------------------------------------------------
@@ -200,6 +201,56 @@ load_all()
 
 searchCwacTerm("Season")
 searchCwacTerm(option = "fields")
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
+
+# Function checkListEqual --------------------------------------------------
+
+# Add function
+use_r("checkListEqual")
+
+# test locally
+load_all()
+
+checkListEqual(x = list(a = "character", b = c("c", "h")))
+
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
+
+
+# Function getCwacSiteCounts --------------------------------------------------
+
+# Add function
+use_r("getCwacSiteCounts")
+
+# test locally
+load_all()
+
+getCwacSiteCounts(26352535)
 # Add documentation
 # Add ROxygen skeleton manually
 document()
