@@ -2,6 +2,7 @@
 
 export("%>%")
 export(checkListEqual)
+export(getCwacSiteCounts)
 export(getCwacSiteInfo)
 export(getCwacSurvey)
 export(jsonToTibble)

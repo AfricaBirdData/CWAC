@@ -22,4 +22,5 @@ Imports:
     RCurl,
     readr,
     rjson,
-    stringr
+    stringr,
+    utils

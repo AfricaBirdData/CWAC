@@ -38,6 +38,7 @@ use_package("readr")
 use_package("RCurl")
 use_package("rjson")
 use_package("data.table")
+use_package("utils")
 
 
 # Function listCwacSites --------------------------------------------------
@@ -249,8 +250,7 @@ use_r("getCwacSiteCounts")
 # test locally
 load_all()
 
-searchCwacTerm("Season")
-searchCwacTerm(option = "fields")
+getCwacSiteCounts(26352535)
 # Add documentation
 # Add ROxygen skeleton manually
 document()
