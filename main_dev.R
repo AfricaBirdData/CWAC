@@ -214,6 +214,57 @@ use_test()
 
 test()
 
+
+# Function checkListEqual --------------------------------------------------
+
+# Add function
+use_r("checkListEqual")
+
+# test locally
+load_all()
+
+checkListEqual(x = list(a = "character", b = c("c", "h")))
+
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
+
+
+# Function getCwacSiteCounts --------------------------------------------------
+
+# Add function
+use_r("getCwacSiteCounts")
+
+# test locally
+load_all()
+
+searchCwacTerm("Season")
+searchCwacTerm(option = "fields")
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
 # Install -----------------------------------------------------------------
 
 devtools::install()
