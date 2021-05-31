@@ -17,6 +17,10 @@ And finally, downloading the surveys correspoding to those cards:
 
 survey <- getCwacSurvey(cards[1])
 
+Alternatively, one can get all the counts recorded for a site using:
+
+getCwacSiteCounts(loc_code)
+
 ## INSTRUCTION TO INSTALL
 
 1. Clone the repository to your local machine:
