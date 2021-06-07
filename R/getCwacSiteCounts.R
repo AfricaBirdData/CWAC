@@ -10,41 +10,41 @@
 #' getCwacSiteCounts("26352535")
 getCwacSiteCounts <- function(loc_code){
 
-  # Extract location cards
-  cards <- CWAC::listCwacCards(loc_code)
 
-  # Download surveys based on location cards
-  invisible(utils::capture.output(surveys <- lapply(cards$Card, CWAC::getCwacSurvey)))
+  url <- paste0("https://pipeline.birdmap.africa/cwac/records/LocationCode/", loc_code, "?short=1")
 
+  myfile <- RCurl::getURL(url, ssl.verifyhost = FALSE, ssl.verifypeer = FALSE)
 
-  # Join counts with survey metadata ----------------------------------------
+  out <- rjson::fromJSON(myfile) %>%
+    CWAC::jsonToTibble()
 
-  # Extract counts
-  counts <- lapply(surveys, "[[", "records")
+  # Format
+  out <- out %>%
+    readr::type_convert(col_types = readr::cols(
+      .default = readr::col_integer(),
+      LocationName = readr::col_character(),
+      Province = readr::col_character(),
+      Country = readr::col_character(),
+      StartDate = readr::col_date(format = ""),
+      Season = readr::col_character(),
+      TimeStart = readr::col_time(format = ""),
+      TimeEnd = readr::col_time(format = ""),
+      WetlandThreat = readr::col_logical(),
+      Notes = readr::col_character(),
+      record_status = readr::col_character(),
+      Survey_notes = readr::col_logical(),
+      WetIntCode = readr::col_character(),
+      Odr = readr::col_character(),
+      Family = readr::col_character(),
+      Genus = readr::col_character(),
+      Species = readr::col_character(),
+      Common_group = readr::col_character(),
+      Common_species = readr::col_character(),
+      Y = readr::col_double(),
+      X = readr::col_double()
+    ))
 
-  # Check that all surveys have the same fields
-  if(CWAC::checkListEqual(lapply(counts, names))){
-
-     # If TRUE bind data frame
-    counts <- do.call("rbind", counts)
-
-  } else {
-
-    stop("Count data frames have different fields, when they shouldn't.")
-
-  }
-
-  # Extract survey metadata
-  info <- lapply(surveys, "[[", "summary")
-
-  # Use data.table to bind dataframes with different fields
-  info <- data.table::rbindlist(info, fill = TRUE)
-
-  # Combine data and info
-  counts <- dplyr::full_join(counts, info, by = c("card" = "Card"))
-
-  # Save data ---------------------------------------------------------------
-
-  return(counts)
+  # Save data
+  return(out)
 
 }
