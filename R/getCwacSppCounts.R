@@ -1,17 +1,16 @@
-#' Get all CWAC counts from a site
+#' Get all CWAC counts for a species
 #'
-#' @param loc_code The code of a CWAC site
+#' @param spp_code The CWAC code of a species
 #'
-#' @return A tibble with all the counts recorded for the desired site. Note that there might be warnings about formatting.
+#' @return A tibble with all the counts recorded for the desired species. Note that there might be warnings about formatting.
 #' @export
 #'
 #' @examples
-#' getCwacSiteCounts(26352535)
-#' getCwacSiteCounts("26352535")
-getCwacSiteCounts <- function(loc_code){
+#' getCwacSppCounts(41)
+#' getCwacSppCounts("41")
+getCwacSppCounts <- function(sp_code){
 
-
-  url <- paste0("https://pipeline.birdmap.africa/cwac/records/LocationCode/", loc_code, "?short=1")
+  url <- paste0("https://pipeline.birdmap.africa/cwac/records/SppRef/", sp_code, "?short=1")
 
   myfile <- RCurl::getURL(url, ssl.verifyhost = FALSE, ssl.verifypeer = FALSE)
 
