@@ -49,7 +49,7 @@ use_r("listCwacSites")
 # test locally
 load_all()
 
-listCwacSites("Eastern Cape")
+listCwacSites("North West")
 
 # Add documentation
 # Add ROxygen skeleton manually
@@ -264,6 +264,30 @@ use_testthat()
 use_test()
 
 test()
+
+# Function getCwacSppCounts --------------------------------------------------
+
+# Add function
+use_r("getCwacSppCounts")
+
+# test locally
+load_all()
+
+getCwacSppCounts(42)
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
 
 # Install -----------------------------------------------------------------
 

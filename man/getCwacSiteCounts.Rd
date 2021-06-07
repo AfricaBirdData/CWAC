@@ -10,7 +10,7 @@ getCwacSiteCounts(loc_code)
 \item{loc_code}{The code of a CWAC site}
 }
 \value{
-A tibble with all the counts recorded for the desired site
+A tibble with all the counts recorded for the desired site. Note that there might be warnings about formatting.
 }
 \description{
 Get all CWAC counts from a site

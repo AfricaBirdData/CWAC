@@ -15,7 +15,7 @@ listCwacSites <- function(province){
   province <- stringr::str_replace(province, " ", "%20")
   province <- tolower(province)
 
-  url <- paste0('http://api.adu.org.za/cwac/sites/list?province=', province)
+  url <- paste0("https://pipeline.birdmap.africa/cwac/location/province/", province, "?short=1")
 
   myfile <- RCurl::getURL(url, ssl.verifyhost = FALSE, ssl.verifypeer = FALSE)
 
