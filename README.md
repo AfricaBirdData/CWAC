@@ -7,7 +7,9 @@ A typical workflow entails locating a site of interest, say Barberspan:
 
 require(dplyr)
 
-loc_code <- listCwacSites("North West") %>% filter(Name == "Barberspan") %>% pull(Loc_code)
+loc_code <- listCwacSites("North West") %>%
+   filter(Name == "Barberspan") %>% 
+   pull(Loc_code)
 
 Then, we can download all the counts for a particular site
 
