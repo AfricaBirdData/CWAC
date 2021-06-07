@@ -9,17 +9,13 @@ require(dplyr)
 
 loc_code <- listCwacSites("North West") %>% filter(Name == "Barberspan") %>% pull(Loc_code)
 
-Then, listing the cards correspoding to the site:
+Then, we can download all the counts for a particular site
 
-cards <- listCwacCards(loc_code) %>% pull(Card)
+sitecounts <- getCwacSiteCounts(loc_code)
 
-And finally, downloading the surveys correspoding to those cards:
+Or we can download all the counts for a particular species (pass CWAC code)
 
-survey <- getCwacSurvey(cards[1])
-
-Alternatively, one can get all the counts recorded for a site using:
-
-getCwacSiteCounts(loc_code)
+sppcounts <- getCwacSppCounts(41)
 
 ## INSTRUCTION TO INSTALL
 
