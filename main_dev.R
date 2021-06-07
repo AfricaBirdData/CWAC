@@ -49,7 +49,7 @@ use_r("listCwacSites")
 # test locally
 load_all()
 
-listCwacSites("Eastern Cape")
+listCwacSites("North West")
 
 # Add documentation
 # Add ROxygen skeleton manually
