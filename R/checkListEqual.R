@@ -2,7 +2,9 @@
 #'
 #' @param x A list
 #'
-#' @return TRUE if all elements in a list are identical, FALSE otherwise. If the function finds an element that is different it will print the elements that differ
+#' @return TRUE if all elements in a list are identical, FALSE otherwise.
+#' If the function finds an element that is different it will print the
+#' elements that differ
 #' @export
 #'
 #' @examples

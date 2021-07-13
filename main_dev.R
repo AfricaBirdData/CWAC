@@ -289,6 +289,31 @@ use_test()
 test()
 
 
+# Function getCwacSppList --------------------------------------------------
+
+# Add function
+use_r("getCwacSppList")
+
+# test locally
+load_all()
+
+getCwacSppList()
+
+# Add documentation
+# Add ROxygen skeleton manually
+document()
+
+check()
+
+# Add tests
+
+use_testthat()
+
+use_test()
+
+test()
+
+
 # Install -----------------------------------------------------------------
 
 devtools::install()

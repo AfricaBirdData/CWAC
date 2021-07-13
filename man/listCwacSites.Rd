@@ -7,9 +7,13 @@
 listCwacSites(province)
 }
 \arguments{
-\item{province}{A character string with the name of the province of interest. Available provinces are:
-Northern Province, Mpumalanga, North West, Gauteng, KwaZulu-Natal, Free State, Northern Cape, Western Cape, Eastern Cape, Kenya, Angola, Tanzania, Limpopo.
-NORTHERN PROVINCE IS ACTUALLY NOT AVAILABLE, ALTHOUGH IT SAYS IT IS ON THE WEBSITE.}
+\item{province}{A character string with the name of the province of interest.
+Available provinces are:
+Northern Province, Mpumalanga, North West, Gauteng, KwaZulu-Natal,
+Free State, Northern Cape, Western Cape, Eastern Cape, Kenya, Angola,
+Tanzania, Limpopo.
+NORTHERN PROVINCE IS ACTUALLY NOT AVAILABLE, ALTHOUGH IT SAYS IT IS ON THE
+WEBSITE.}
 }
 \value{
 A tibble with a list of all active sites for the province

@@ -2,7 +2,8 @@
 #'
 #' @param spp_code The CWAC code of a species
 #'
-#' @return A tibble with all the counts recorded for the desired species. Note that there might be warnings about formatting.
+#' @return A tibble with all the counts recorded for the desired species.
+#' Note that there might be warnings about formatting.
 #' @export
 #'
 #' @examples

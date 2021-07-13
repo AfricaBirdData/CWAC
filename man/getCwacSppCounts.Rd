@@ -10,7 +10,8 @@ getCwacSppCounts(sp_code)
 \item{spp_code}{The CWAC code of a species}
 }
 \value{
-A tibble with all the counts recorded for the desired species. Note that there might be warnings about formatting.
+A tibble with all the counts recorded for the desired species.
+Note that there might be warnings about formatting.
 }
 \description{
 Get all CWAC counts for a species

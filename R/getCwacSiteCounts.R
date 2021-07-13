@@ -2,7 +2,8 @@
 #'
 #' @param loc_code The code of a CWAC site
 #'
-#' @return A tibble with all the counts recorded for the desired site. Note that there might be warnings about formatting.
+#' @return A tibble with all the counts recorded for the desired site. Note that
+#' there might be warnings about formatting.
 #' @export
 #'
 #' @examples

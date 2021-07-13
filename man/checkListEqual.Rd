@@ -10,7 +10,9 @@ checkListEqual(x)
 \item{x}{A list}
 }
 \value{
-TRUE if all elements in a list are identical, FALSE otherwise. If the function finds an element that is different it will print the elements that differ
+TRUE if all elements in a list are identical, FALSE otherwise.
+If the function finds an element that is different it will print the
+elements that differ
 }
 \description{
 Checks that all elements in a list are identical
