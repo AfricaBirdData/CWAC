@@ -22,6 +22,8 @@ use_mit_license("BIRDIE Development Team")
 
 # Remember to edit the DESCRIPTION file
 
+# Create RMarkdown README
+usethis::use_readme_rmd()
 
 
 # Imports -----------------------------------------------------------------
@@ -289,15 +291,15 @@ use_test()
 test()
 
 
-# Function getCwacSppList --------------------------------------------------
+# Function listCwacSpp --------------------------------------------------
 
 # Add function
-use_r("getCwacSppList")
+use_r("listCwacSpp")
 
 # test locally
 load_all()
 
-getCwacSppList()
+listCwacSpp()
 
 # Add documentation
 # Add ROxygen skeleton manually
