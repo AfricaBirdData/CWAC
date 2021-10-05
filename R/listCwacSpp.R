@@ -5,7 +5,7 @@
 #'
 #' @examples
 #' getCwacSppList()
-getCwacSppList <- function(){
+listCwacSpp <- function(){
 
   url <- paste0("https://pipeline.birdmap.africa/cwac/species/?short=1")
 
@@ -22,6 +22,8 @@ getCwacSppList <- function(){
       GlobalIBA_1_Level = readr::col_integer(),
       SubRegional_IBA_05_Level = readr::col_integer()
     ))
+
+  out <- out[out$SppRef != "0",]
 
   # Save data
   return(out)
