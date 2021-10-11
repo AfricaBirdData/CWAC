@@ -3,8 +3,6 @@
 
 # CWAC
 
-\#Test Comment
-
 <!-- badges: start -->
 <!-- badges: end -->
 
