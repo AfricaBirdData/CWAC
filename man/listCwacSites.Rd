@@ -4,16 +4,15 @@
 \alias{listCwacSites}
 \title{Retrieve a list of active CWAC sites registered in a South African province}
 \usage{
-listCwacSites(province)
+listCwacSites(.region_type = c("country", "province", "pentad"), .region)
 }
 \arguments{
-\item{province}{A character string with the name of the province of interest.
-Available provinces are:
-Northern Province, Mpumalanga, North West, Gauteng, KwaZulu-Natal,
-Free State, Northern Cape, Western Cape, Eastern Cape, Kenya, Angola,
-Tanzania, Limpopo.
-NORTHERN PROVINCE IS ACTUALLY NOT AVAILABLE, ALTHOUGH IT SAYS IT IS ON THE
-WEBSITE.}
+\item{.region_type}{The type of region we are interested on.
+Three options: "country", "province" and "pentad".}
+
+\item{.region}{A character string corresponding to the specific region we are
+interested in. It can be either a country in Southern Africa, a South African
+province or a pentad code.}
 }
 \value{
 A tibble with a list of all active sites for the province
@@ -22,6 +21,6 @@ A tibble with a list of all active sites for the province
 Retrieve a list of active CWAC sites registered in a South African province
 }
 \examples{
-listCwacSites("Western Cape")
-listCwacSites("western cape")
+listCwacSites(.region_type = "province", .region = "Western Cape")
+listCwacSites(.region_type = "country", .region = "Kenya")
 }

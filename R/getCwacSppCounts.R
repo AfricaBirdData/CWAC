@@ -13,7 +13,12 @@ getCwacSppCounts <- function(sp_code){
 
   url <- paste0("https://pipeline.birdmap.africa/cwac/records/SppRef/", sp_code, "?short=1")
 
-  myfile <- RCurl::getURL(url, ssl.verifyhost = FALSE, ssl.verifypeer = FALSE)
+  myfile <- httr::RETRY("GET", url) %>%
+    httr::content(as = "text", encoding = "UTF-8")
+
+  if(myfile == ""){
+    stop("We couldn't retrieve your query. Please check your spelling and try again.")
+  }
 
   out <- rjson::fromJSON(myfile) %>%
     CWAC::jsonToTibble()
