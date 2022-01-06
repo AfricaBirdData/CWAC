@@ -41,6 +41,7 @@ use_package("httr")
 use_package("rjson")
 use_package("data.table")
 use_package("utils")
+use_package("tidyr")
 
 
 # Function listCwacSites --------------------------------------------------

@@ -23,4 +23,5 @@ Imports:
     readr,
     rjson,
     stringr,
+    tidyr,
     utils
