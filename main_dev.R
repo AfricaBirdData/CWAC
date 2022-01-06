@@ -37,10 +37,11 @@ use_package("magrittr")
 use_package("lubridate")
 use_package("stringr")
 use_package("readr")
-use_package("RCurl")
+use_package("httr")
 use_package("rjson")
 use_package("data.table")
 use_package("utils")
+use_package("tidyr")
 
 
 # Function listCwacSites --------------------------------------------------

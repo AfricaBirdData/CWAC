@@ -4,10 +4,11 @@
 \alias{getCwacSppCounts}
 \title{Get all CWAC counts for a species}
 \usage{
-getCwacSppCounts(sp_code)
+getCwacSppCounts(spp_code)
 }
 \arguments{
-\item{spp_code}{The CWAC code of a species}
+\item{spp_code}{The CWAC code of a species. Only a single species is accepted
+at the moment.}
 }
 \value{
 A tibble with all the counts recorded for the desired species.

@@ -1,6 +1,7 @@
 #' Get all CWAC counts for a species
 #'
-#' @param spp_code The CWAC code of a species
+#' @param spp_code The CWAC code of a species. Only a single species is accepted
+#' at the moment.
 #'
 #' @return A tibble with all the counts recorded for the desired species.
 #' Note that there might be warnings about formatting.
@@ -9,11 +10,16 @@
 #' @examples
 #' getCwacSppCounts(41)
 #' getCwacSppCounts("41")
-getCwacSppCounts <- function(sp_code){
+getCwacSppCounts <- function(spp_code){
 
-  url <- paste0("https://pipeline.birdmap.africa/cwac/records/SppRef/", sp_code, "?short=1")
+  url <- paste0("https://pipeline.birdmap.africa/cwac/records/SppRef/", spp_code, "?short=1")
 
-  myfile <- RCurl::getURL(url, ssl.verifyhost = FALSE, ssl.verifypeer = FALSE)
+  myfile <- httr::RETRY("GET", url) %>%
+    httr::content(as = "text", encoding = "UTF-8")
+
+  if(myfile == ""){
+    stop("We couldn't retrieve your query. Please check your spelling and try again.")
+  }
 
   out <- rjson::fromJSON(myfile) %>%
     CWAC::jsonToTibble()

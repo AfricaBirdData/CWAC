@@ -13,5 +13,5 @@ A dataframe with a list of all species recorded in the CWAC project
 Get CWAC species list
 }
 \examples{
-getCwacSppList()
+listCwacSpp()
 }

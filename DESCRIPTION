@@ -17,10 +17,11 @@ RoxygenNote: 7.1.2
 Imports: 
     data.table,
     dplyr,
+    httr,
     lubridate,
     magrittr,
-    RCurl,
     readr,
     rjson,
     stringr,
+    tidyr,
     utils

@@ -17,7 +17,12 @@ searchCwacTerm <- function(term = NULL, option = c("term", "fields")){
 
   url <- "http://api.adu.org.za/cwac/dictionary/get"
 
-  myfile <- RCurl::getURL(url, ssl.verifyhost = FALSE, ssl.verifypeer = FALSE)
+  myfile <- httr::RETRY("GET", url) %>%
+    httr::content(as = "text", encoding = "UTF-8")
+
+  if(myfile == ""){
+    stop("We couldn't retrieve your query. Please check your spelling and try again.")
+  }
 
   dict <- rjson::fromJSON(myfile)
 
