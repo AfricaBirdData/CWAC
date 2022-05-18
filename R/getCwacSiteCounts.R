@@ -25,6 +25,10 @@ getCwacSiteCounts <- function(loc_code){
   out <- rjson::fromJSON(myfile) %>%
     CWAC::jsonToTibble()
 
+  if(ncol(out) == 0){
+    stop(paste("No records found for site", loc_code))
+  }
+
   # Format
   out <- out %>%
     dplyr::mutate(TimeStart = substr(TimeStart, 1, 5),

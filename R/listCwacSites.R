@@ -36,5 +36,9 @@ listCwacSites <- function(.region_type = c("country", "province", "pentad"),
   out <- rjson::fromJSON(myfile) %>%
     CWAC::jsonToTibble()
 
+  # Format
+  out <- out %>%
+    readr::type_convert()
+
   return(out)
 }

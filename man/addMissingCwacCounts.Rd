@@ -4,10 +4,14 @@
 \alias{addMissingCwacCounts}
 \title{Add missing CWAC counts to CWAC site data}
 \usage{
-addMissingCwacCounts(site_counts)
+addMissingCwacCounts(site_counts, years)
 }
 \arguments{
 \item{site_counts}{A dataframe obtained from \link[CWAC]{getCwacSiteCounts}}
+
+\item{years}{A vector of years the function should complete. This is useful
+for cases where counts are missing at the beginning or end of the period. We
+can explicitly state which years should be in the data.}
 }
 \value{
 The same site_counts dataframe provided with additional rows for
@@ -18,5 +22,5 @@ Add missing CWAC counts to CWAC site data
 }
 \examples{
 counts <- getCwacSiteCounts(26352535)
-counts_w_miss <- addMissingCwacCounts(counts)
+counts_w_miss <- addMissingCwacCounts(counts, years = 1993:2020)
 }
