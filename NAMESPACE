@@ -2,6 +2,7 @@
 
 export("%>%")
 export(addMissingCwacCounts)
+export(addVarEEclosestImage)
 export(checkListEqual)
 export(getCwacSiteCounts)
 export(getCwacSiteInfo)
