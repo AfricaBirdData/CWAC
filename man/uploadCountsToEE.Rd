@@ -4,7 +4,13 @@
 \alias{uploadCountsToEE}
 \title{Upload counts to Google Earth Engine server}
 \usage{
-uploadCountsToEE(counts, asset_id, load = TRUE, max_p = 16250)
+uploadCountsToEE(
+  counts,
+  asset_id,
+  load = TRUE,
+  max_counts = 16250,
+  max_try = 10
+)
 }
 \arguments{
 \item{counts}{An \href{https://github.com/r-spatial/sf}{sf} object with the
@@ -16,9 +22,12 @@ saved on the server with.}
 
 \item{load}{If TRUE (default), the GEE asset is loaded into the R session.}
 
-\item{max_p}{Maximum number of counts the function will try to upload
+\item{max_counts}{Maximum number of counts the function will try to upload
 without splitting into pieces. The default is a sensible choice but you can
 try modify it to serve your purposes.}
+
+\item{max_try}{Maximum number of tries the function checks for the creation
+of the asset on GEE.}
 }
 \value{
 Counts are uploaded to GEE. In addition a GEE feature collection can
@@ -34,6 +43,9 @@ the function will upload to objects and merge them in the server under the
 name provided. Please be conscious that two intermediate objects will also
 be stored under names "p1" and "p2". We recommend visiting your account and
 cleaning unnecesary objects regularly.
+The creation of the asset might take some time after all the computations are
+finished. The function will check every minute during max_try minutes, and if
+it is not successful at finding the asset will return an error.
 }
 \examples{
 \dontrun{

@@ -6,9 +6,11 @@
 #' @param asset_id A character string with the name we want our counts to be
 #' saved on the server with.
 #' @param load If TRUE (default), the GEE asset is loaded into the R session.
-#' @param max_p Maximum number of counts the function will try to upload
+#' @param max_counts Maximum number of counts the function will try to upload
 #' without splitting into pieces. The default is a sensible choice but you can
 #' try modify it to serve your purposes.
+#' @param max_try Maximum number of tries the function checks for the creation
+#' of the asset on GEE.
 #'
 #' @return Counts are uploaded to GEE. In addition a GEE feature collection can
 #' be loaded into the R environment
@@ -18,6 +20,9 @@
 #' name provided. Please be conscious that two intermediate objects will also
 #' be stored under names "p1" and "p2". We recommend visiting your account and
 #' cleaning unnecesary objects regularly.
+#' The creation of the asset might take some time after all the computations are
+#' finished. The function will check every minute during max_try minutes, and if
+#' it is not successful at finding the asset will return an error.
 #' @export
 #'
 #' @examples
@@ -41,15 +46,15 @@
 #'                                 asset_id = assetId,
 #'                                 load = TRUE)
 #' }
-uploadCountsToEE <- function(counts, asset_id, load = TRUE, max_p = 16250){
+uploadCountsToEE <- function(counts, asset_id, load = TRUE, max_counts = 16250, max_try = 10){
 
   nfeats <- nrow(counts)
 
   # Upload counts
 
-  if(nfeats > max_p){                                   # For large objects
+  if(nfeats > max_counts){                                   # For large objects
 
-    print("Object larger than max_p, so splitting in half")
+    print("Object larger than max_counts, so splitting in half")
 
     halfeats <- nfeats %/% 2
 
@@ -79,6 +84,23 @@ uploadCountsToEE <- function(counts, asset_id, load = TRUE, max_p = 16250){
     rgee::sf_as_ee(counts,
                    assetId = asset_id,
                    via = "getInfo_to_asset")
+  }
+
+  # check that the asset has been produced and wait longer otherwise
+  assets <- rgee::ee_manage_assetlist(rgee::ee_get_assethome())
+
+  try = 1
+  while(!asset_id %in% assets$ID && try <= max_try){
+    message(paste("Checking GEE asset status", try, "of", max_try))
+    Sys.sleep(60)
+    assets <- rgee::ee_manage_assetlist(rgee::ee_get_assethome())
+    try = try + 1
+  }
+
+  if(!asset_id %in% assets$ID){
+    error(paste("Asset", asset_id, "was not created after", max_try, "minutes."))
+  } else {
+    message(paste("Asset", asset_id, "created"))
   }
 
   # Load if required

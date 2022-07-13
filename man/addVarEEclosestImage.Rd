@@ -40,9 +40,6 @@ allowed for now.}
 computing means, counts, etc. Sometimes we might want to avoid this behaviour
 and use 0 instead of NA. If so, set unmask to TRUE.}
 }
-\value{
-
-}
 \description{
 Each feature in a feature collection (i.e. row in a simple feature
 collection) is matched with the image in an image collection that is closest
