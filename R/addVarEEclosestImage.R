@@ -95,14 +95,14 @@ addVarEEclosestImage <- function(ee_counts, collection, reducer, maxdiff,
   best_matches <- saveBestJoin$apply(ee_counts, ee_layer, maxDiffFilter)
 
   # Function to add value from the matched image
-  reducer <- paste0("rgee::ee$Reducer$", reducer, "()")
+  eeReducer <- paste0("rgee::ee$Reducer$", reducer, "()")
   add_value <- function(feature){
 
     # Get the image selected by the join
     img <- rgee::ee$Image(feature$get("bestImage"))$select(bands)
 
     # Reduce values within pentad
-    pentad_val <- img$reduceRegion(reducer = eval(parse(text = reducer)),
+    pentad_val <- img$reduceRegion(reducer = eval(parse(text = eeReducer)),
                                    geometry = feature$geometry(),
                                    scale = scale,
                                    maxPixels = 3e7)
