@@ -51,6 +51,10 @@ addVarEEclosestImage <- function(ee_counts, collection, reducer, maxdiff,
     stop("collection must be either a character string or a GEE image collection")
   }
 
+  # Stop if there is more than one band
+  if(length(bands) > 1){
+    error("Sorry, too many bands. The function only supports one band at a time for now")
+  }
 
   # Get nominal scale for the layer (native resolution) and projection
   scale <- ee_layer$first()$projection()$nominalScale()$getInfo()
@@ -112,6 +116,13 @@ addVarEEclosestImage <- function(ee_counts, collection, reducer, maxdiff,
   # Add values to the data and download
   out <- best_matches$map(add_value) %>%
     rgee::ee_as_sf(via = 'drive')
+
+  # Fix names and variables
+  layer_name <- paste0(bands, "_", reducer)
+  out <- out %>%
+    dplyr::rename_with(~gsub("val", layer_name, .x), .cols = dplyr::starts_with("val")) %>%
+    dplyr::select(-c(id, date_millis, bestImage)) %>%
+    dplyr::select(id_count, dplyr::everything(), DateTimeImage)
 
   return(out)
 
