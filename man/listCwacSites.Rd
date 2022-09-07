@@ -4,15 +4,15 @@
 \alias{listCwacSites}
 \title{Retrieve a list of active CWAC sites registered in a South African province}
 \usage{
-listCwacSites(.region_type = c("country", "province", "pentad"), .region)
+listCwacSites(.region_type = c("country", "province"), .region)
 }
 \arguments{
 \item{.region_type}{The type of region we are interested on.
-Three options: "country", "province" and "pentad".}
+Two options: "country" and "province".}
 
 \item{.region}{A character string corresponding to the specific region we are
-interested in. It can be either a country in Southern Africa, a South African
-province or a pentad code.}
+interested in. It can be either a country in Southern Africa, or a South African
+province.}
 }
 \value{
 A tibble with a list of all active sites for the province
