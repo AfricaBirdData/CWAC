@@ -23,7 +23,7 @@ getCwacSiteInfo <- function(loc_code){
 
   jsonout <- jsonfile$status
 
-  print(jsonout$result)
+  # print(jsonout$result)
 
   out <- jsonfile$site %>%
     CWAC::jsonToTibble()
