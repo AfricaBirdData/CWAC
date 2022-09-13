@@ -42,6 +42,7 @@ use_package("rjson")
 use_package("data.table")
 use_package("utils")
 use_package("tidyr")
+use_package("sf")
 
 
 # Function listCwacSites --------------------------------------------------
