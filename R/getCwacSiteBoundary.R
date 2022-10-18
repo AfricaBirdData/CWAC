@@ -1,41 +1,67 @@
-#' Get a CWAC site boundary
+#' Get a CWAC sites boundaries
 #'
-#' @details This function retrieves the coordinate list for a CWAC site and
-#' creates an simple feature polygon.
+#' @description This function retrieves the coordinate list for a set of CWAC sites and
+#' creates an simple feature polygon object.
 #'
-#' @param loc_code The code of a CWAC site
+#' @param loc_code Optional (see details). A vector with the location code of the CWAC sites
+#' @param region_type The type of region we are interested in.
+#' Two options: "country" and "province".
+#' @param region A character string corresponding to the specific region we are
+#' interested in. It can be either a country in Southern Africa, or a South African
+#' province.
 #'
-#' @return A simple feature polygon for a CWAC site.
+#' @details A `region_type` and a `region` must be specified. This means that sites can
+#' only be retrieved from one province/country on a single call. However, multiple
+#' sites from the same province/country can be retrieved at once. If no `loc_code`
+#' is specified, then, all boundaries for all sites from the `region` are retrieved.
+#' Note that not all boundaries are available in the database. A warning message
+#' will be produced notifying about which sites are missing.
+#'
+#' @return A simple feature polygon for the selected CWAC sites.
 #' @export
 #'
 #' @examples
 #' getCwacSiteBoundary(26352535)
 #' getCwacSiteBoundary("26352535")
 
-getCwacSiteBoundary <- function(loc_code){
+getCwacSiteBoundary <- function(loc_code = NULL, region_type, region){
 
+  # Get the list of CWAC sites
+  sites <- listCwacSites(region_type, region)
 
-  url <- paste0("https://api.birdmap.africa/cwac/site/boundary/get?locationCode=", loc_code)
-
-  # Extract data
-  myfile <- httr::RETRY("GET", url) %>%
-    httr::content(as = "text", encoding = "UTF-8")
-
-  if(myfile == ""){
-    stop("We couldn't retrieve your query. Please check your spelling and try again.")
+  # Subset sites if necessary
+  if(!is.null(loc_code)){
+    sites <- sites %>%
+      dplyr::filter(LocationCode %in% loc_code)
   }
 
-  out <- rjson::fromJSON(myfile)[[1]] %>%
-    CWAC::jsonToTibble()
+  # Detect missing site boundaries
+  missing_bd <- sites %>%
+    dplyr::filter(is.na(CoordinateList)) %>%
+    dplyr::pull(LocationCode) %>%
+    paste(collapse = ", ")
 
-  if(ncol(out) == 0){
-    stop(paste("No records found for site", loc_code))
-  }
+  warning(paste("Boundaries not found for sites:", missing_bd))
 
-  coord_list <- out$coordinates
+  # Transform coordinate lists into sf objects
+  site_bd <- sites %>%
+    dplyr::pull(CoordinateList) %>%
+    coordListToSf()
 
-  coordListToSf(coord_list)
+  sites <- sites %>%
+    dplyr::mutate(geometry = site_bd) %>%
+    sf::st_sf()
 
+  # Combine those sites with multiple polygons
+  sites_comb <- sites %>%
+    dplyr::group_by(LocationCode) %>%
+    summarise(geometry = sf::st_union(geometry)) %>%
+    ungroup()
+
+  sites_comb %>%
+    dplyr::select(LocationCode, geometry) %>%
+    dplyr::mutate(LocationCode = as.integer(LocationCode)) %>% # To match other functions
+    return()
 
 }
 
@@ -48,15 +74,40 @@ coordListToSf <- function(coord_list){
   # Create vectors of lon lat coordinates
   coord_vec <- unlist(strsplit(coord_list, split = ","))
 
-  lon <- as.numeric(coord_vec[seq(1, length(coord_vec)-1, 2)])
-  lat <- as.numeric(coord_vec[seq(2, length(coord_vec), 2)])
+  coord_vec <- strsplit(coord_list, split = ",")
 
-  # Polygons need to be closed. Add a coordinate if not
-  if((lon[1] != lon[length(lon)]) | (lat[1] != lat[length(lat)])){
-    lon[length(lon)+1] <- lon[1]
-    lat[length(lat)+1] <- lat[1]
+  missing <- which(is.na(coord_vec))
+  present <- which(!is.na(coord_vec))
+
+  coord_vec <- coord_vec[present]
+
+  lon <- lapply(coord_vec, function(x)
+    as.numeric(x[seq(1, length(x)-1, 2)]))
+  lat <- lapply(coord_vec, function(x)
+    as.numeric(x[seq(2, length(x), 2)]))
+
+  # Make coordinate matrices
+  coords <- vector("list", length = length(coord_vec))
+
+  for(i in seq_along(lon)){
+
+    # Polygons need to be closed. Add a coordinate if not
+    lon_i <- lon[[i]]; lat_i <- lat[[i]]
+    if((lon_i[1] != lon_i[length(lon_i)]) | (lat_i[1] != lat_i[length(lat_i)])){
+      lon_i[length(lon_i)+1] <- lon_i[1]
+      lat_i[length(lat_i)+1] <- lat_i[1]
+    }
+
+    coords[[i]] <- list(cbind(lon_i, lat_i))
+
   }
 
-  sf::st_polygon(list(cbind(lon, lat)))
+  sf_pols <- lapply(coords, sf::st_polygon)
+
+  out <- vector("list", length = length(coord_list))
+
+  out[present] <- sf_pols
+
+  return(out)
 
 }

@@ -2,22 +2,34 @@
 % Please edit documentation in R/getCwacSiteBoundary.R
 \name{getCwacSiteBoundary}
 \alias{getCwacSiteBoundary}
-\title{Get a CWAC site boundary}
+\title{Get a CWAC sites boundaries}
 \usage{
-getCwacSiteBoundary(loc_code)
+getCwacSiteBoundary(loc_code = NULL, region_type, region)
 }
 \arguments{
-\item{loc_code}{The code of a CWAC site}
+\item{loc_code}{Optional (see details). A vector with the location code of the CWAC sites}
+
+\item{region_type}{The type of region we are interested in.
+Two options: "country" and "province".}
+
+\item{region}{A character string corresponding to the specific region we are
+interested in. It can be either a country in Southern Africa, or a South African
+province.}
 }
 \value{
-A simple feature polygon for a CWAC site.
+A simple feature polygon for the selected CWAC sites.
 }
 \description{
-Get a CWAC site boundary
+This function retrieves the coordinate list for a set of CWAC sites and
+creates an simple feature polygon object.
 }
 \details{
-This function retrieves the coordinate list for a CWAC site and
-creates an simple feature polygon.
+A \code{region_type} and a \code{region} must be specified. This means that sites can
+only be retrieved from one province/country on a single call. However, multiple
+sites from the same province/country can be retrieved at once. If no \code{loc_code}
+is specified, then, all boundaries for all sites from the \code{region} are retrieved.
+Note that not all boundaries are available in the database. A warning message
+will be produced notifying about which sites are missing.
 }
 \examples{
 getCwacSiteBoundary(26352535)
