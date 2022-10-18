@@ -21,11 +21,11 @@ knitr::opts_chunk$set(
 This packages provides functionality to access and download data from the 
 Coordinated Waterbird Counts project.
 
-A typical workflow entails locating either a site or a species of interest and
-download CWAC records for them. 
+A typical workflow entails locating either a site or a species of interest, and
+downloading CWAC records available for them. 
 
 Note: remember that if you ever wonder what any of the fields in the tables are
-you can try find it with `searchCwacTerm`.
+you can try find them with `searchCwacTerm`.
 
 ### Locate and download data for a site
 
@@ -33,7 +33,7 @@ Let's use Barberspan, a CWAC site located in the North West province of South Af
 as an example. The first thing we need to do is find our site's ID code. We can use
 the function `listCwacSites` to list all the sites in the North West and find this code.
 
-```{r}
+```{r,eval=FALSE}
 library(CWAC)
 
 # List all sites at the North West province
@@ -48,16 +48,15 @@ getCwacSiteInfo(site_id)
 ```
 
 
-Once we have the code for the CWAC site, we can download the count data collected
+Once we have the code for the CWAC site, we can download count data collected
 there using the function `getCwacSiteCounts`. This will download all the CWAC cards
 submitted for Barberspan.
 
-```{r}
+```{r, eval=FALSE}
 bp_counts <- getCwacSiteCounts(site_id)
-head(bp_counts)
 ```
 
-We can do all this using a [dplyr](https://dplyr.tidyverse.org/) approach.
+We can do all of this using a [dplyr](https://dplyr.tidyverse.org/) approach.
 
 ```{r, eval=FALSE}
 library(dplyr, warn.conflicts = FALSE)
@@ -81,7 +80,7 @@ To find the species code we can use the function `listCwacSpp`, which lists all
 CWAC species, and from this list we can find the one we want. Say we are interested in the 
 African Black Duck.
 
-```{r}
+```{r, eval=FALSE}
 # List all species
 spp_all <- listCwacSpp()
 
@@ -95,12 +94,12 @@ sp_id <- spp_all[spp_all$Common_species == "African Black" &
 Once we have the code, we can download the data for this species across all CWAC
 sites with the function `getCwacSppCounts()`
 
-```{r}
+```{r, eval=FALSE}
 bd_counts <- getCwacSppCounts(sp_id)
 ```
 
-You may get some warnings from the parser because data wasn't entered in a
-standard format. Make sure your analysis won't be impacted by this.
+You may get some warnings from the parser because data weren't entered in a
+standard format. We preferred printing these messages, so that you can make sure your analysis won't be impacted by this.
 
 Again, we can also do all this using [dplyr](https://dplyr.tidyverse.org/).
 
@@ -129,7 +128,7 @@ which needs to be installed using
 remotes::install_github("AfricaBirdData/ABDtools")
 ```
 
-The package `ABDtools` builds upon the [`rgee`](https://github.com/r-spatial/rgee),
+The package `ABDtools` builds upon [`rgee`](https://github.com/r-spatial/rgee),
 which translates R code into Python code using `reticulate`, and allows us
 to use the GEE Python client libraries from R! You can find extensive documentation
 about `rgee` [here](https://github.com/r-spatial/rgee).
@@ -137,7 +136,7 @@ about `rgee` [here](https://github.com/r-spatial/rgee).
 But first, we need to create a GEE account, install `rgee` (and dependencies)
 and configure our Google Drive to upload and download data to and from  GEE.
 There are other ways of upload and download but we recommend Google Drive,
-because it is simple and effective. Configuration is a bit of a process, but you
+because it is free, simple and effective. Configuration is a bit of a process, but you
 will have to do this only once. 
 
  - To create a GEE account, please follow these [instructions](https://earthengine.google.com/signup/).
@@ -145,10 +144,10 @@ will have to do this only once.
  - To configure Google Drive, follow these [instructions](https://r-spatial.github.io/rgee/articles/rgee01.html).
  
 We have nothing to do with the above steps, so if you get stuck along the way,
-please search the web or contact the developers directly.
+please search the web or contact the corresponding developers directly.
 
 Phew, well done if you managed that! With configuration out of the way, let's
-see how to annotate some pentads. We've coded some wrappers around basic
+see how to annotate some data. We've coded some wrappers around basic
 functions from the `rgee` package to provide some **basic** functionality without
 having to know almost anything about GEE. However, if you want more complicated
 workflows, we totally recommend learning how to use GEE and `rgee` and exploit 
@@ -186,11 +185,11 @@ upload it again.
 GEE-related functions from the `ADBtools` package work with spatial data and therefore
 our counts must be uploaded as spatial objects. When we download counts using 'getCwacSiteCounts()' 
 or 'getCwacSppCounts()', the resulting dataframe contains 'X', 'Y' coordinates that
-correspond to the longitude, latitude of the centroid of the CWAC site were the
+correspond to the longitude, latitude of the point from where
 counts were collected. We can use this information to create a spatial object.
 
 
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 library(CWAC)
 library(dplyr, warn.conflicts = FALSE)
 library(sf)
@@ -211,9 +210,9 @@ class(bd_counts)
 
 We can now upload this object to GEE and annotate it with environmental covariates.
 GEE can be temperamental with the type of data you upload, so we recommend leaving
-in the dataframe only those variables, that you will be needing for your GEE your analysis.
+in the data frame only those variables, that you will be needing for your GEE analysis.
 Remember to always include an identifier field that allows you to join the results
-back to you original data, in case you need to. In this case, we will leave only the start
+back to you original data. In this case, we will leave only the start
 date of the survey and the aforementioned identifier. GEE likes dates in a character
 format, so lets transform the variable before proceeding.
 
@@ -245,12 +244,12 @@ This might seem a bit confusing at first but you will get used to it.
 ### Annotate counts with a GEE image
 
 An image in GEE jargon is the same thing as a raster in R. There are also image
-collections which are like raster stacks (we'll see more about these later). You 
+collections, which are like raster stacks (we'll see more about these later). You 
 can find a full catalog of what is available in GEE [here](https://developers.google.com/earth-engine/datasets/catalog).
 If you want to annotate your data using a single image you can use the function
 `addVarEEimage`.
 
-For example, let's annotate our counts with [surface water occurrence](https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_3_GlobalSurfaceWater),
+For example, let's annotate our counts with [surface water occurrence](https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_GlobalSurfaceWater),
 which is the frequency with which water was present in each pixel. We'll need
 the name of the layer in GEE, which is given in the field "Earth Engine Snippet".
 Images can have multiple bands -- in this case, we select "occurrence".
@@ -259,7 +258,7 @@ Images can have multiple bands -- in this case, we select "occurrence".
 ```{r eval=FALSE}
 
 counts_water <- addVarEEimage(ee_feats = ee_counts,                   # Note that we need our remote asset here
-                              image = "JRC/GSW1_3/GlobalSurfaceWater",   # You can find this in the code snippet
+                              image = "JRC/GSW1_4/GlobalSurfaceWater",   # You can find this in the code snippet
                               bands = "occurrence")
 
 ```
@@ -268,7 +267,7 @@ counts_water <- addVarEEimage(ee_feats = ee_counts,                   # Note tha
 
 Sometimes data don't come in a single image, but in multiple images. For example,
 we might have one image for each day, week, month, etc, the variable of interest was measured. 
-GEE calls this image stacks image 'collections'. Again, we can check
+GEE calls these image stacks image 'collections'. Again, we can check
 all available data in the [GEE catalog](https://developers.google.com/earth-engine/datasets/catalog).
 
 When we want to annotate data with a collection, `ABDtools` offers two options:
@@ -281,7 +280,7 @@ When we want to annotate data with a collection, `ABDtools` offers two options:
  
 We demonstrate both functions annotating data with the [TerraClimate dataset](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_TERRACLIMATE).
 
-Say we are interested in the mean minimum temperature in year 2010. For this we could use
+Say we are interested in the mean minimum temperature in year 2010. We could use
 the function `addVarEEcollection()`, as follows:
 
 ```{r eval=FALSE}
@@ -305,19 +304,17 @@ this new image to annotate our data.
 If we wanted to annotate with the closest image in the collection, instead of with a summary over
 time, then we would need to upload visit data with an associated date to GEE. Dates must
 be in a character format ("yyyy-mm-dd") and the variable must be called 'Date' (case sensitive).
-We already did some of this at the beginning (please check the section 'Uploading data to GEE' if you don't know what
-we are talking about), but we will need to adjust our data slightly to work with TerraClimate data.
+We already did some of this at the beginning (please check the section 'Uploading data to GEE' if you can't remember), but we will need to adjust our data slightly to work with TerraClimate data.
 
 TerraClimate offers monthly data and the date associated with each image is always the
 first day of the month. This means that if we have data corresponding to a date after
-the 15th of the month they will be matched against the next month, because they are closer in time.
+the 15th of the month they will be matched against the next month, because that's the one closest in time.
 
-Each image collection its own convention, and we must check what is appropriate in each
+Each image collection has its own convention, and we must check what is appropriate in each
 case. Here, for illustration purposes, we will change all dates in our data to be on the first
 of the month to match TerraClimate.
 
-As an example, let's download CWAC data for the Maccoa Duck in 2010 and
-annotate these data with TerraClimate's monthly minimum temperature data.
+As an example, let's annotate our African Black Duck data with TerraClimate's monthly minimum temperature data.
 
 ```{r eval=FALSE}
 
@@ -353,7 +350,7 @@ Lastly, we have made a convenience function that converts an image collection
 into a multi-band image. This is useful because you can only annotate one
 image at a time, but all the bands in the image get annotated. So if you want to
 add several variables to your data, you can first create a multi-band image and 
-then annotate with all bands at once. This way you minimize the traffic between your
+then annotate with all bands at once. In this way you minimize the traffic between your
 machine and GEE servers saving precious time and bandwidth.
 
 Here we show how to find the mean NDVI for each year between 2008 and 2010,
@@ -363,12 +360,12 @@ create a multi-band image and annotate our data with these bands.
 
 # Create a multi-band image with mean NDVI for each year
 multiband <- EEcollectionToMultiband(collection = "MODIS/006/MOD13A2",
-                                           dates = c("2008-01-01", "2011-01-01"),
-                                           band = "NDVI",                       # You can find what bands are available from GEE catalog
-                                           group_type = "year",
-                                           groups = 2008:2010,
-                                           reducer = "mean",
-                                           unmask = FALSE)
+                                     dates = c("2008-01-01", "2011-01-01"),
+                                     band = "NDVI",
+                                     group_type = "year",
+                                     groups = 2008:2010,
+                                     reducer = "mean",
+                                     unmask = FALSE)
 
 # Annotate our count data with yearly mean NDVI from 2008 to 2010
 counts_ndvi <- addVarEEimage(ee_counts, multiband)
