@@ -23,10 +23,10 @@ addMissingCwacCounts <- function(site_counts, years){
     dplyr::filter(Year %in% years)
 
   # Some records are classified as "O" (other). We are only interested in summer and winter
-  # so we filter out "O" and sum all counts per card
+  # so we filter out anything else and sum all counts per card
   counts_w_miss <- site_counts %>%
     dplyr::mutate(present = 1) %>%  # Aux variable to identify new records
-    dplyr::filter(Season != "O") %>%
+    dplyr::filter(Season %in% c("S", "W")) %>%
     dplyr::group_by(LocationCode, X, Y, Card, StartDate, Year, Season, present) %>%
     dplyr::summarize(count = sum(Count),
                      present = sum(present)) %>%
