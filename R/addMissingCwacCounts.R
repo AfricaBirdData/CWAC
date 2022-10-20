@@ -14,32 +14,40 @@
 #' counts_w_miss <- addMissingCwacCounts(counts, years = 1993:2020)
 addMissingCwacCounts <- function(site_counts, years){
 
+  if(length(unique(site_counts$LocationCode)) > 1){
+    stop("There is more than one CWAC location in the data. Please, process one location at a time.")
+  }
+
   # Subset data to the years of interest
   site_counts <- site_counts %>%
     dplyr::filter(Year %in% years)
 
   # Some records are classified as "O" (other). We are only interested in summer and winter
   # so we filter out "O" and sum all counts per card
-  counts_all_spp <- site_counts %>%
-    dplyr::filter(Season != "O",
-                  Year %in% years) %>%
-    dplyr::group_by(LocationCode, X, Y, Card, Year, Season) %>%
-    dplyr::summarize(count = sum(Count)) %>%
+  counts_w_miss <- site_counts %>%
+    dplyr::mutate(present = 1) %>%  # Aux variable to identify new records
+    dplyr::filter(Season != "O") %>%
+    dplyr::group_by(LocationCode, X, Y, Card, StartDate, Year, Season, present) %>%
+    dplyr::summarize(count = sum(Count),
+                     present = sum(present)) %>%
     dplyr::ungroup() %>%
     tidyr::complete(Year = years, Season = c("S", "W"), LocationCode, X, Y) # Fill in missing years
 
   # Separate missing counts
-  missing <- counts_all_spp %>%
-    dplyr::filter(is.na(count))
+  missing <- counts_w_miss %>%
+    dplyr::filter(is.na(present)) %>%
+    dplyr::select(-present)
 
   # Append to original dataframe
   missing[dplyr::setdiff(names(site_counts), names(missing))] <- NA
+
   site_counts <- site_counts %>%
     rbind(missing %>%
-            dplyr::select(names(site_counts)))
+            dplyr::select(names(site_counts))) %>%
+    dplyr::arrange(Year, Season, StartDate)
 
   if(dplyr::n_distinct(site_counts[,c("LocationCode", "X", "Y")]) != 1){
-    warning("Counts for more than one site OR same site with different coordinates detected")
+    warning("Counts with different coordinates detected. Review output.")
   }
 
   return(site_counts)
