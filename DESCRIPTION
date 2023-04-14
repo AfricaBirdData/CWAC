@@ -1,6 +1,6 @@
 Package: CWAC
 Title: Access to Coordinated Water Counts data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "BIRDIE",
            family = "Development Team",

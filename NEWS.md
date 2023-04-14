@@ -1,3 +1,9 @@
+# CWAC 0.1.1
+
+* Removed unnecessary dependencies: data.table, lubridate, utils
+
+* Fixed arguments with multiple set options
+
 # CWAC 0.1.0
 
 * First package release
