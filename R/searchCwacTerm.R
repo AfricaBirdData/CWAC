@@ -15,6 +15,8 @@
 #' searchCwacTerm(option = "fields")
 searchCwacTerm <- function(term = NULL, option = c("term", "fields")){
 
+  option <- match.arg(option, c("term", "fields"))
+
   url <- "http://api.adu.org.za/cwac/dictionary/get"
 
   myfile <- httr::RETRY("GET", url) %>%

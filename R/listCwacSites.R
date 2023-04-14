@@ -15,11 +15,7 @@
 listCwacSites <- function(.region_type = c("country", "province"),
                           .region){
 
-  if(is.null(.region_type)){
-    .region_type <- "country"
-  } else if(!.region_type %in% c("country", "province")){
-    stop(".region_type must be either 'country' or 'province'")
-  }
+  .region_type <- match.arg(.region_type, c("country", "province"))
 
   .region <- stringr::str_replace(.region, " ", "%20") %>%
     tolower()

@@ -21,10 +21,14 @@
 #' @export
 #'
 #' @examples
-#' getCwacSiteBoundary(26352535)
-#' getCwacSiteBoundary("26352535")
+#' getCwacSiteBoundary(26352535, "country", "South Africa")
+#' getCwacSiteBoundary("26352535", "country", "South Africa")
 
-getCwacSiteBoundary <- function(loc_code = NULL, region_type, region){
+getCwacSiteBoundary <- function(loc_code = NULL,
+                                region_type = c("country", "province"),
+                                region){
+
+  region_type <- match.arg(region_type, c("country", "province"))
 
   # Get the list of CWAC sites
   sites <- listCwacSites(region_type, region)
@@ -55,8 +59,8 @@ getCwacSiteBoundary <- function(loc_code = NULL, region_type, region){
   # Combine those sites with multiple polygons
   sites_comb <- sites %>%
     dplyr::group_by(LocationCode) %>%
-    summarise(geometry = sf::st_union(geometry)) %>%
-    ungroup()
+    dplyr::summarise(geometry = sf::st_union(geometry)) %>%
+    dplyr::ungroup()
 
   sites_comb %>%
     dplyr::select(LocationCode, geometry) %>%

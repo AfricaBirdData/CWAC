@@ -4,7 +4,11 @@
 \alias{getCwacSiteBoundary}
 \title{Get a CWAC sites boundaries}
 \usage{
-getCwacSiteBoundary(loc_code = NULL, region_type, region)
+getCwacSiteBoundary(
+  loc_code = NULL,
+  region_type = c("country", "province"),
+  region
+)
 }
 \arguments{
 \item{loc_code}{Optional (see details). A vector with the location code of the CWAC sites}
@@ -32,6 +36,6 @@ Note that not all boundaries are available in the database. A warning message
 will be produced notifying about which sites are missing.
 }
 \examples{
-getCwacSiteBoundary(26352535)
-getCwacSiteBoundary("26352535")
+getCwacSiteBoundary(26352535, "country", "South Africa")
+getCwacSiteBoundary("26352535", "country", "South Africa")
 }
