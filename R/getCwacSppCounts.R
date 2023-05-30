@@ -24,8 +24,10 @@ getCwacSppCounts <- function(spp_code){
   out <- rjson::fromJSON(myfile) %>%
     CWAC::jsonToTibble()
 
-  if(nrow(out) == 0){
-    stop(paste("There seems to be no data for species", spp_code))
+  # If there is no data for the species return an empty data frame (stored as package data)
+  if(ncol(out) == 0){
+    warning(paste("There seems to be no data for species", spp_code))
+    return(cwac_count_vars)
   }
 
   # Format
