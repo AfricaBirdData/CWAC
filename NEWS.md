@@ -1,3 +1,7 @@
+# CWAC 0.1.2
+
+* Added an informative error when there is no data in CWAC for a species
+
 # CWAC 0.1.1
 
 * Removed unnecessary dependencies: data.table, lubridate, utils
