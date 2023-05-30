@@ -24,6 +24,10 @@ getCwacSppCounts <- function(spp_code){
   out <- rjson::fromJSON(myfile) %>%
     CWAC::jsonToTibble()
 
+  if(nrow(out) == 0){
+    stop(paste("There seems to be no data for species", spp_code))
+  }
+
   # Format
   out <- out %>%
     dplyr::mutate(TimeStart = substr(TimeStart, 1, 5),
