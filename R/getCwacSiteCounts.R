@@ -26,7 +26,8 @@ getCwacSiteCounts <- function(loc_code){
     CWAC::jsonToTibble()
 
   if(ncol(out) == 0){
-    stop(paste("No records found for site", loc_code))
+    warning(paste("There seems to be no data for site", loc_code))
+    return(cwac_count_vars)
   }
 
   # Format
