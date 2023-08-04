@@ -27,7 +27,7 @@ getCwacSiteCounts <- function(loc_code){
 
   if(ncol(out) == 0){
     warning(paste("There seems to be no data for site", loc_code))
-    return(cwac_count_vars)
+    return(CWAC::cwac_count_vars)
   }
 
   # Format
@@ -38,6 +38,8 @@ getCwacSiteCounts <- function(loc_code){
                   TimeEnd = gsub("\\.", ":", TimeEnd)) %>%
     readr::type_convert(col_types = readr::cols(
       .default = readr::col_integer(),
+      LocationCode = readr::col_character(),
+      LocationCodeAlias = readr::col_character(),
       LocationName = readr::col_character(),
       Province = readr::col_character(),
       Country = readr::col_character(),
