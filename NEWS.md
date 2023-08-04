@@ -1,3 +1,7 @@
+# CWAC 0.1.3
+
+* Return empty data frame, with informative warning, when no CWAC data for a site.
+
 # CWAC 0.1.2
 
 * Return empty data frame, with informative warning, when no CWAC data for a species.
