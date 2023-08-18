@@ -18,7 +18,6 @@ Imports:
     dplyr,
     httr,
     magrittr,
-    readr,
     rjson,
     sf,
     stringr,

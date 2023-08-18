@@ -25,42 +25,27 @@ getCwacSiteCounts <- function(loc_code){
   out <- rjson::fromJSON(myfile) %>%
     CWAC::jsonToTibble()
 
+  # If there is no data for the site return an empty data frame (stored as package data)
   if(ncol(out) == 0){
-    warning(paste("There seems to be no data for site", loc_code))
-    return(CWAC::cwac_count_vars)
+    warning(paste("There seems to be no data for species", spp_code))
+    out <- CWAC::cwac_count_vars
   }
 
-  # Format
+  # Format rest of columns
   out <- out %>%
-    dplyr::mutate(TimeStart = substr(TimeStart, 1, 5),
-                  TimeEnd = substr(TimeEnd, 1, 5),
-                  TimeStart = gsub("\\.", ":", TimeStart),
-                  TimeEnd = gsub("\\.", ":", TimeEnd)) %>%
-    readr::type_convert(col_types = readr::cols(
-      .default = readr::col_integer(),
-      LocationCode = readr::col_character(),
-      LocationCodeAlias = readr::col_character(),
-      LocationName = readr::col_character(),
-      Province = readr::col_character(),
-      Country = readr::col_character(),
-      StartDate = readr::col_date(format = ""),
-      Season = readr::col_character(),
-      TimeStart = readr::col_time(format = ""),
-      TimeEnd = readr::col_time(format = ""),
-      WetlandThreat = readr::col_logical(),
-      Notes = readr::col_character(),
-      record_status = readr::col_character(),
-      Survey_notes = readr::col_logical(),
-      WetIntCode = readr::col_character(),
-      Odr = readr::col_character(),
-      Family = readr::col_character(),
-      Genus = readr::col_character(),
-      Species = readr::col_character(),
-      Common_group = readr::col_character(),
-      Common_species = readr::col_character(),
-      Y = readr::col_double(),
-      X = readr::col_double()
-    ))
+    dplyr::mutate(LocationCode = as.character(LocationCode),
+                  LocationCodeAlias = as.character(LocationCodeAlias),
+                  LocationName = as.character(LocationName),
+                  Year = as.integer(Year),
+                  StartDate = as.Date(StartDate),
+                  NoCount = as.integer(NoCount),
+                  TotalCount = as.integer(TotalCount),
+                  TotalSpecies = as.integer(TotalSpecies),
+                  SppRef = as.integer(SppRef),
+                  Count = as.integer(Count),
+                  Pairs = as.integer(Pairs),
+                  X = as.numeric(X),
+                  Y = as.numeric(Y))
 
   # Save data
   return(out)

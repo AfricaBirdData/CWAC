@@ -21,14 +21,9 @@ listCwacSpp <- function(){
 
   # Format
   out <- out %>%
-    readr::type_convert(col_types = readr::cols(
-      .default = readr::col_character(),
-      Ramsar_1_Level = readr::col_integer(),
-      GlobalIBA_1_Level = readr::col_integer(),
-      SubRegional_IBA_05_Level = readr::col_integer()
-    ))
+    dplyr::mutate(SppRef = as.integer(SppRef))
 
-  out <- out[out$SppRef != "0",]
+  out <- out[out$SppRef != 0,]
 
   # Save data
   return(out)
