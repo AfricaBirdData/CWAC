@@ -1,3 +1,9 @@
+# CWAC 0.1.4
+
+* Changed column specification of dataframes. There were problems with trailing
+zeros in some codes such as `LocationCode` and dates, so we are now more conservative
+and favour character variables.
+
 # CWAC 0.1.3
 
 * Return empty data frame, with informative warning, when no CWAC data for a site.
