@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # CWAC 
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/AfricaBirdData/CWAC/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AfricaBirdData/CWAC/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 This packages provides functionality to access and download data from the 

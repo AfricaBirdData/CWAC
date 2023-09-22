@@ -4,6 +4,8 @@
 # CWAC
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/AfricaBirdData/CWAC/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AfricaBirdData/CWAC/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 This packages provides functionality to access and download data from
@@ -126,12 +128,12 @@ recommend Google Drive, because it is free, simple and effective.
 Configuration is a bit of a process, but you will have to do this only
 once.
 
--   To create a GEE account, please follow these
-    [instructions](https://earthengine.google.com/signup/).
--   To install `rgee`, follow these
-    [instructions](https://github.com/r-spatial/rgee#installation).
--   To configure Google Drive, follow these
-    [instructions](https://r-spatial.github.io/rgee/articles/rgee01.html).
+- To create a GEE account, please follow these
+  [instructions](https://earthengine.google.com/signup/).
+- To install `rgee`, follow these
+  [instructions](https://github.com/r-spatial/rgee#installation).
+- To configure Google Drive, follow these
+  [instructions](https://r-spatial.github.io/rgee/articles/rgee01.html).
 
 We have nothing to do with the above steps, so if you get stuck along
 the way, please search the web or contact the corresponding developers
@@ -162,7 +164,7 @@ library(rgee)
 # Check installation
 ee_check()
 #> ◉  Python version
-#> ✔ [Ok] /home/pachorris/.virtualenvs/rgee/bin/python v3.6
+#> ✔ [Ok] /home/pachorris/.virtualenvs/rgee/bin/python v3.8
 #> ◉  Python packages:
 #> ✔ [Ok] numpy
 #> ✔ [Ok] earthengine-api
@@ -281,12 +283,11 @@ catalog](https://developers.google.com/earth-engine/datasets/catalog).
 When we want to annotate data with a collection, `ABDtools` offers two
 options:
 
--   We can use `addVarEEcollection` to summarize the image collection
-    over time (e.g., calculate the mean over a period of time)
+- We can use `addVarEEcollection` to summarize the image collection over
+  time (e.g., calculate the mean over a period of time)
 
--   Or we can use `addVarEEclosestImage` to annotate each feature (row)
-    in the data with the image in the collection that is closest in
-    time.
+- Or we can use `addVarEEclosestImage` to annotate each feature (row) in
+  the data with the image in the collection that is closest in time.
 
 We demonstrate both functions annotating data with the [TerraClimate
 dataset](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_TERRACLIMATE).
@@ -499,12 +500,12 @@ think of using the appropriate spatial reducer.
 
 First clone the repository to your local machine:
 
--   In RStudio, create a new project
--   In the ‘Create project’ menu, select ‘Version Control’/‘Git’
--   Copy the repository URL (click on the ‘Code’ green button and copy
-    the link)
--   Choose the appropriate directory and ‘Create project’
--   Remember to pull the latest version regularly
+- In RStudio, create a new project
+- In the ‘Create project’ menu, select ‘Version Control’/‘Git’
+- Copy the repository URL (click on the ‘Code’ green button and copy the
+  link)
+- Choose the appropriate directory and ‘Create project’
+- Remember to pull the latest version regularly
 
 For site owners:
 
@@ -518,23 +519,22 @@ To deal with these lurking issues, I would suggest opening and working
 on a topic branch. This is a just a regular branch that has a short
 lifespan. In steps:
 
--   Open a branch at your local machine
--   Push to the remote repo
--   Make your changes in your local machine
--   Commit and push to remote
--   Create pull request:
-    -   In the GitHub repo you will now see an option that notifies of
-        changes in a branch: click compare and pull request.
--   Delete the branch. When you are finished, you will have to delete
-    the new branch in the remote repo (GitHub) and also in your local
-    machine. In your local machine you have to use Git directly, because
-    apparently RStudio doesn´t do it:
-    -   In your local machine, change to master branch.
-    -   Either use the Git GUI (go to branches/delete/select
-        branch/push).
-    -   Or use the console typing ‘git branch -d your_branch_name’.
-    -   It might also be necessary to prune remote branches with ‘git
-        remote prune origin’.
+- Open a branch at your local machine
+- Push to the remote repo
+- Make your changes in your local machine
+- Commit and push to remote
+- Create pull request:
+  - In the GitHub repo you will now see an option that notifies of
+    changes in a branch: click compare and pull request.
+- Delete the branch. When you are finished, you will have to delete the
+  new branch in the remote repo (GitHub) and also in your local machine.
+  In your local machine you have to use Git directly, because apparently
+  RStudio doesn´t do it:
+  - In your local machine, change to master branch.
+  - Either use the Git GUI (go to branches/delete/select branch/push).
+  - Or use the console typing ‘git branch -d your_branch_name’.
+  - It might also be necessary to prune remote branches with ‘git remote
+    prune origin’.
 
 Opening branches is quick and easy, so there is no harm in opening
 multiple branches a day. However, it is important to merge and delete
