@@ -5,3 +5,4 @@ main_dev
 beta/*
 ^README\.Rmd$
 ^\.github$
+data_prep/*
