@@ -17,6 +17,6 @@ there might be warnings about formatting.
 Get all CWAC counts from a site
 }
 \examples{
-getCwacSiteCounts(26352535)
+getCwacSiteCounts(26352535) # Results in warning
 getCwacSiteCounts("26352535")
 }

@@ -7,10 +7,13 @@
 #' @export
 #'
 #' @examples
-#' getCwacSiteCounts(26352535)
+#' getCwacSiteCounts(26352535) # Results in warning
 #' getCwacSiteCounts("26352535")
 getCwacSiteCounts <- function(loc_code){
 
+  if(is.numeric(loc_code)){
+    warning("loc_code is numeric and this might result in loss of leading zeros. It is recommended to use character strings instead.")
+  }
 
   url <- paste0("https://pipeline.birdmap.africa/cwac/records/LocationCode/", loc_code, "?short=1")
 
