@@ -7,15 +7,23 @@
 #'
 #' @return The same site_counts dataframe provided with additional rows for
 #' those Winter or Summer seasons for which no data were collected.
+#' @details Note that this function only works for South Africa currently. This
+#' is because it assumes that there are only two seasons: summer (labelled "S") and
+#' winter (labelled "W"). If any of these seasons have no data for any given
+#' year the function will fill it in with an NA.
 #' @export
 #'
 #' @examples
-#' counts <- getCwacSiteCounts(26352535)
+#' counts <- getCwacSiteCounts("26352535")
 #' counts_w_miss <- addMissingCwacCounts(counts, years = 1993:2020)
 addMissingCwacCounts <- function(site_counts, years){
 
   if(length(unique(site_counts$LocationCode)) > 1){
     stop("There is more than one CWAC location in the data. Please, process one location at a time.")
+  }
+
+  if(unique(site_counts$Country) != "South Africa"){
+    stop("This function currently only takes count data from South African sites. See details in ?addMissingCwacCounts")
   }
 
   # Subset data to the years of interest

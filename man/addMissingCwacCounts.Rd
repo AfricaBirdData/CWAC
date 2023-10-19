@@ -20,7 +20,13 @@ those Winter or Summer seasons for which no data were collected.
 \description{
 Add missing CWAC counts to CWAC site data
 }
+\details{
+Note that this function only works for South Africa currently. This
+is because it assumes that there are only two seasons: summer (labelled "S") and
+winter (labelled "W"). If any of these seasons have no data for any given
+year the function will fill it in with an NA.
+}
 \examples{
-counts <- getCwacSiteCounts(26352535)
+counts <- getCwacSiteCounts("26352535")
 counts_w_miss <- addMissingCwacCounts(counts, years = 1993:2020)
 }
