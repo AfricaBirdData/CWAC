@@ -6,3 +6,4 @@ beta/*
 ^README\.Rmd$
 ^\.github$
 data_prep/*
+^codecov\.yml$
