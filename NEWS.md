@@ -1,3 +1,7 @@
+# CWAC 0.1.4
+
+* Functions that list species and sites return fields as characters
+
 # CWAC 0.1.3
 
 * Return empty data frame, with informative warning, when no CWAC data for a site.
