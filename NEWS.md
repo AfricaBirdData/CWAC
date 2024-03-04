@@ -2,6 +2,8 @@
 
 * Functions that list species and sites return fields as characters
 
+* Updated tests with the addition of new RAMSAR field to the site and species tables
+
 # CWAC 0.1.3
 
 * Return empty data frame, with informative warning, when no CWAC data for a site.

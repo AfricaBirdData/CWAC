@@ -19,7 +19,7 @@ test_that("we get the correct number of columns", {
 
   my_data <- suppressWarnings(getCwacSiteCounts(sample(sites_za, 1)))
 
-  ref_data <- readRDS(test_path("fixtures", "empty_cwac_site_df_20231017.rds"))
+  ref_data <- readRDS(test_path("fixtures", "empty_cwac_site_df_20230304.rds"))
 
   expect_equal(ncol(my_data), ncol(ref_data))
 
@@ -30,7 +30,7 @@ test_that("we get the correct types of columns", {
 
   my_data <- suppressWarnings(getCwacSiteCounts(sample(sites_za, 1)))
 
-  ref_data <- readRDS(test_path("fixtures", "empty_cwac_site_df_20231017.rds"))
+  ref_data <- readRDS(test_path("fixtures", "empty_cwac_site_df_20230304.rds"))
 
   expect_equal(sapply(my_data, class), sapply(ref_data, class))
 
