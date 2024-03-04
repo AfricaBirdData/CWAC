@@ -22,10 +22,7 @@ listCwacSpp <- function(){
   # Format
   out <- out %>%
     readr::type_convert(col_types = readr::cols(
-      .default = readr::col_character(),
-      Ramsar_1_Level = readr::col_integer(),
-      GlobalIBA_1_Level = readr::col_integer(),
-      SubRegional_IBA_05_Level = readr::col_integer()
+      .default = readr::col_character()
     ))
 
   out <- out[out$SppRef != "0",]

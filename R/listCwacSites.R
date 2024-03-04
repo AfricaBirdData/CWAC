@@ -34,8 +34,10 @@ listCwacSites <- function(.region_type = c("country", "province"),
 
   # Format
   out <- out %>%
-    readr::type_convert(col_types = readr::cols()) %>%
-    suppressMessages()
+    readr::type_convert(col_types = readr::cols(
+      .default = readr::col_character(),
+      LocationCode = readr::col_character(),
+      LocationCodeAlias = readr::col_character()))
 
   return(out)
 }
