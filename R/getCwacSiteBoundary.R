@@ -42,10 +42,15 @@ getCwacSiteBoundary <- function(loc_code = NULL,
   # Detect missing site boundaries
   missing_bd <- sites %>%
     dplyr::filter(is.na(CoordinateList)) %>%
-    dplyr::pull(LocationCode) %>%
-    paste(collapse = ", ")
+    dplyr::pull(LocationCode)
 
-  warning(paste("Boundaries not found for sites:", missing_bd))
+  if(length(missing_bd) != 0){
+    warning(
+      paste("Boundaries not found for sites:",
+            paste(missing_bd, collapse = ", "))
+    )
+  }
+
 
   # Transform coordinate lists into sf objects
   site_bd <- sites %>%
