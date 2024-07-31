@@ -12,7 +12,11 @@ Two options: "country" and "province".}
 
 \item{.region}{A character string corresponding to the specific region we are
 interested in. It can be either a country in Southern Africa, or a South African
-province.}
+province. At the moment, CWAC
+serves data from four countries: Angola, South Africa, Kenya and Tanzania.
+Only South African provinces are available: Western Cape,
+Eastern Cape, Northern Cape, Free State, Limpopo, Mpumalanga, KwaZulu-Natal,
+Gauteng, and Northwest Province.}
 }
 \value{
 A tibble with a list of all active sites for the province

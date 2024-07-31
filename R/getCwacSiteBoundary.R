@@ -15,7 +15,11 @@
 #' sites from the same province/country can be retrieved at once. If no `loc_code`
 #' is specified, then, all boundaries for all sites from the `region` are retrieved.
 #' Note that not all boundaries are available in the database. A warning message
-#' will be produced notifying about which sites are missing.
+#' will be produced notifying about which sites are missing. At the moment, CWAC
+#' serves data from four countries: Angola, South Africa, Kenya and Tanzania.
+#' Only South African provinces are available: Western Cape,
+#' Eastern Cape, Northern Cape, Free State, Limpopo, Mpumalanga, KwaZulu-Natal,
+#' Gauteng, and Northwest Province.
 #'
 #' @return A simple feature polygon for the selected CWAC sites.
 #' @export

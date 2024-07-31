@@ -33,7 +33,11 @@ only be retrieved from one province/country on a single call. However, multiple
 sites from the same province/country can be retrieved at once. If no \code{loc_code}
 is specified, then, all boundaries for all sites from the \code{region} are retrieved.
 Note that not all boundaries are available in the database. A warning message
-will be produced notifying about which sites are missing.
+will be produced notifying about which sites are missing. At the moment, CWAC
+serves data from four countries: Angola, South Africa, Kenya and Tanzania.
+Only South African provinces are available: Western Cape,
+Eastern Cape, Northern Cape, Free State, Limpopo, Mpumalanga, KwaZulu-Natal,
+Gauteng, and Northwest Province.
 }
 \examples{
 getCwacSiteBoundary(26352535, "country", "South Africa")
