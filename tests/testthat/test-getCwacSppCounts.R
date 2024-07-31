@@ -20,7 +20,7 @@ test_that("we get the correct number of columns", {
 
   my_data <- suppressWarnings(getCwacSppCounts(sample(spp, 1)))
 
-  ref_data <- readRDS(test_path("fixtures", "empty_cwac_spp_df_20231017.rds"))
+  ref_data <- readRDS(test_path("fixtures", "empty_cwac_spp_df_20240731.rds"))
 
   expect_equal(ncol(my_data), ncol(ref_data))
 
@@ -31,7 +31,7 @@ test_that("we get the correct types of columns", {
 
   my_data <- suppressWarnings(getCwacSppCounts(sample(spp, 1)))
 
-  ref_data <- readRDS(test_path("fixtures", "empty_cwac_spp_df_20231017.rds"))
+  ref_data <- readRDS(test_path("fixtures", "empty_cwac_spp_df_20240731.rds"))
 
   expect_equal(sapply(my_data, class), sapply(ref_data, class))
 
