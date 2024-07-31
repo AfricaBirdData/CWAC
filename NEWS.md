@@ -1,3 +1,7 @@
+# CWAC 0.1.5
+
+* Added regions available to documentation
+
 # CWAC 0.1.4
 
 * Functions that list species and sites return fields as characters
